@@ -82,6 +82,7 @@ const goToPrevious = () => {
   const navigation = [
     { name: 'Home', id: 'home' },
     { name: 'About', id: 'about' },
+    { name: 'Services', id: 'services' },
     { name: 'Contact', id: 'contact' }
   ];
 
@@ -102,7 +103,7 @@ const goToPrevious = () => {
   ];
 
   const HomePage = () => (
-    <div>
+    <div id="home">
    {/* Hero Section with Slider */}
       <section className="bg-gradient-to-br from-teal-50 to-cyan-50 py-12 md:py-20 px-4">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -175,7 +176,7 @@ const goToPrevious = () => {
 
     
       {/* Services Section */}
-      <div className="max-w-6xl mx-auto py-16 px-4">
+      <div id="services" className="max-w-6xl mx-auto py-16 px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Our Services</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, idx) => (
@@ -209,7 +210,7 @@ const goToPrevious = () => {
   );
 
   const AboutPage = () => (
-    <div className="max-w-6xl mx-auto py-16 px-4">
+    <div id="about" className="max-w-6xl mx-auto py-16 px-4">
       <h1 className="text-4xl md:text-5xl font-bold text-center mb-8 text-gray-800">About Us</h1>
       
       <div className="bg-gradient-to-r from-teal-500 to-cyan-400 text-white p-8 md:p-12 rounded-lg mb-12">
@@ -245,7 +246,7 @@ const goToPrevious = () => {
 We offer a diverse range of medical equipment, including portable ultrasound systems, diagnostic imaging devices, skincare lasers, and other innovative portable technologies.
 
 Our IT services , PACS Solutions, Web Applications, and Hospital Management Systems, tailored to meet the evolving needs of modern healthcare facilities.
-          </p>
+        </p>
         <p className="text-gray-700 leading-relaxed">
           Throughout our journey, we have remained committed to our founding principles of compassionate care, medical excellence, and community service. Today, we continue to expand our services to meet the evolving healthcare needs of our patients.
         </p>
@@ -289,7 +290,7 @@ Our IT services , PACS Solutions, Web Applications, and Hospital Management Syst
     
 
     return (
-      <div className="max-w-6xl mx-auto py-16 px-4">
+      <div id="contact" className="max-w-6xl mx-auto py-16 px-4">
         <h1 className="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-800">Contact Us</h1>
         
         <div>
@@ -346,56 +347,86 @@ Our IT services , PACS Solutions, Web Applications, and Hospital Management Syst
             </form>
           </div>
 
-          {/* Contact Info */}
-          <div>
-            <div className="bg-gradient-to-br from-teal-500 to-cyan-400 text-white p-8 rounded-lg mb-6">
-              <h2 className="text-2xl font-bold mb-6">Get in Touch</h2>
-              
-              <div className="flex items-start mb-6">
-                <MapPin className="w-6 h-6 mr-4 mt-1 flex-shrink-0" />
-                <div>
-                  <h3 className="font-semibold mb-1">Address</h3>
-                  <p>G2 13A-A,SMCHS Karachi, Pakistan 75400</p>
-                </div>
-              </div>
-
-              <div className="flex items-start mb-6">
-                <Phone className="w-6 h-6 mr-4 mt-1 flex-shrink-0" />
-                <div>
-                  <h3 className="font-semibold mb-1">Phone</h3>
-                  <p>+92 336 4446339</p>
-                </div>
-              </div>
-
-              <div className="flex items-start mb-6">
-                <Mail className="w-6 h-6 mr-4 mt-1 flex-shrink-0" />
-                <div>
-                  <h3 className="font-semibold mb-1">Email</h3>
-                  <p>info@biozaz.com</p>
-                </div>
-              </div>
-
-              <div className="flex items-start">
-                <Clock className="w-6 h-6 mr-4 mt-1 flex-shrink-0" />
-                <div>
-                  <h3 className="font-semibold mb-1">Working Hours</h3>
-                  <p>24/7 Services</p>
-                  <p>Head Office Mon-Sat, 9AM-5PM</p>
-                </div>
-              </div>
+          {/* Contact + Map - show map next to address on same page */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 items-start">
+            {/* Map column (on top for small screens, left for md+) */}
+            <div id="location" className="order-1 md:order-1 flex justify-center">
+              <iframe
+                title="Biozaz Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d268.7493940846305!2d67.04195168893736!3d25.005333594470034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33f7034cbd2d9%3A0x3f591062b06cf2dd!2sBiozaz!5e0!3m2!1sen!2s!4v1761658722214!5m2!1sen!2s"
+                className="w-full h-80 max-w-xl rounded-lg shadow-lg border-0"
+                style={{ minHeight: 280 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
 
-            <div className="bg-cyan-50 p-6 rounded-lg">
-              <h3 className="text-xl font-bold mb-3 text-gray-800">Emergency?</h3>
-              <p className="text-gray-700 mb-4">"Our support team is on standby 24/7 to deliver reliable assistance whenever you need it."</p>
-              <a href="tel:+921234567890" className="inline-block bg-red-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-600 transition">
-                For On-Call Service:+92 336 4446339
-              </a>
+            {/* Contact details column */}
+            <div className="order-2 md:order-2 space-y-6">
+              <div className="bg-gradient-to-br from-teal-500 to-cyan-400 text-white p-8 rounded-lg">
+                <h2 className="text-2xl font-bold mb-6">Get in Touch</h2>
+
+                <div className="flex items-start mb-4">
+                  <MapPin className="w-6 h-6 mr-4 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="font-semibold mb-1">Address</h3>
+                    <p>G2 13A-A, SMCHS Karachi, Pakistan 75400</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start mb-4">
+                  <Phone className="w-6 h-6 mr-4 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="font-semibold mb-1">Phone</h3>
+                    <p>+92 336 4446339</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start mb-4">
+                  <Mail className="w-6 h-6 mr-4 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="font-semibold mb-1">Email</h3>
+                    <p>info@biozaz.com</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <Clock className="w-6 h-6 mr-4 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="font-semibold mb-1">Working Hours</h3>
+                    <p>24/7 Services</p>
+                    <p>Head Office Mon-Sat, 9AM-5PM</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-cyan-50 p-6 rounded-lg">
+                <h3 className="text-xl font-bold mb-3 text-gray-800">Emergency?</h3>
+                <p className="text-gray-700 mb-4">"Our support team is on standby 24/7 to deliver reliable assistance whenever you need it."</p>
+                <a href="tel:+921234567890" className="inline-block bg-red-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-600 transition">
+                  For On-Call Service: +92 336 4446339
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
     );
+  };
+
+  // single-page nav: set active section and smooth-scroll to section id
+  const handleNavClick = (id) => {
+    setCurrentPage(id); // used for nav highlight
+    setMenuOpen(false);
+    setTimeout(() => {
+      if (id === 'home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
   };
 
   return (
@@ -414,7 +445,7 @@ Our IT services , PACS Solutions, Web Applications, and Hospital Management Syst
         {navigation.map((item) => (
           <button
             key={item.id}
-            onClick={() => setCurrentPage(item.id)}
+            onClick={() => handleNavClick(item.id)} // use handler
             className={`relative font-semibold tracking-wide transition-all duration-300 pb-1 
               ${
                 currentPage === item.id
@@ -442,10 +473,7 @@ Our IT services , PACS Solutions, Web Applications, and Hospital Management Syst
         {navigation.map((item) => (
           <button
             key={item.id}
-            onClick={() => {
-              setCurrentPage(item.id);
-              setMenuOpen(false);
-            }}
+            onClick={() => handleNavClick(item.id)} // use same handler for mobile
             className={`block w-full text-left py-2 px-3 rounded-md font-semibold transition-all duration-200 ${
               currentPage === item.id
                 ? 'text-teal-600 bg-teal-50'
@@ -464,10 +492,10 @@ Our IT services , PACS Solutions, Web Applications, and Hospital Management Syst
 <WhatsAppButton />
 
 
-      {/* Page Content */}
-      {currentPage === 'home' && <HomePage />}
-      {currentPage === 'about' && <AboutPage />}
-      {currentPage === 'contact' && <ContactPage />}
+      {/* Page Content: single page layout — render all sections and scroll to them */}
+      <HomePage />
+      <AboutPage />
+      <ContactPage />
 
       {/* Footer */}
     <footer className="bg-gray-900 text-white py-10 px-4 border-t border-teal-600/20">
