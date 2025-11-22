@@ -22,7 +22,7 @@ Our Products </h2> </div>
       <button
         key={cat}
         onClick={() => setFilter(cat)}
-        className={`px-4 py-2 rounded-full border transition backdrop-blur-md shadow-md bg-black/40 text-white border-white/30 hover:bg-black/50`}
+        className={`px-4 py-2 rounded-full border transition backdrop-blur-md shadow-md bg-black/40 text-white border-white/30 hover:bg-black/50 hover:scale-105 hover:shadow-[0_0_15px_rgba(0,255,255,0.5)] transform`}
       >
         {cat}
       </button>
@@ -33,7 +33,7 @@ Our Products </h2> </div>
       placeholder="Search products..."
       value={search}
       onChange={(e) => setSearch(e.target.value)}
-      className="ml-auto px-4 py-2 border rounded-lg w-full md:w-64 bg-black/40 text-white placeholder-white/70 backdrop-blur-md shadow-inner focus:outline-none focus:ring-2 focus:ring-teal-400"
+      className="ml-auto px-4 py-2 border rounded-lg w-full md:w-64 bg-black/40 text-white placeholder-white/70 backdrop-blur-md shadow-inner focus:outline-none focus:ring-2 focus:ring-teal-400 focus:animate-glow-search"
     />
   </div>
 
@@ -46,15 +46,14 @@ Our Products </h2> </div>
         <div
           key={product.id}
           onClick={() => openProduct(product)}
-          className="relative bg-black/20 backdrop-blur-xl border border-white/20 rounded-2xl shadow-lg
-            transition-transform hover:scale-105 cursor-pointer hover:shadow-[0_0_25px_rgba(0,255,255,0.5)] hover:animate-glow-card"
+          className="relative bg-black/20 backdrop-blur-xl border border-white/20 rounded-2xl shadow-lg transition-transform hover:scale-105 cursor-pointer hover:shadow-[0_0_25px_rgba(0,255,255,0.5)] pulse-neon"
         >
           {/* Image */}
-          <div className="overflow-hidden rounded-t-2xl h-64">
+          <div className="overflow-hidden rounded-t-2xl h-64 group">
             <img
               src={product.images[0]}
               alt={product.name}
-              className="w-full h-full object-cover transition-transform duration-500 hover:scale-110 shadow-lg"
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,255,255,0.5)]"
             />
           </div>
 
@@ -87,7 +86,7 @@ Our Products </h2> </div>
     )}
   </div>
 
-  {/* Neon glow animation */}
+  {/* Neon glow animations */}
   <style>{`
     @keyframes glow-heading {
       0%, 100% { box-shadow: 0 0 12px rgba(0,255,255,0.6); }
@@ -97,12 +96,27 @@ Our Products </h2> </div>
       0%, 100% { box-shadow: 0 0 8px rgba(0,255,255,0.2); }
       50% { box-shadow: 0 0 18px rgba(0,255,255,0.5); }
     }
+    @keyframes glow-search {
+      0%, 100% { box-shadow: 0 0 8px rgba(0,255,255,0.4); }
+      50% { box-shadow: 0 0 18px rgba(0,255,255,0.7); }
+    }
+    @keyframes pulse-neon {
+      0%, 100% { box-shadow: 0 0 10px rgba(0,255,255,0.3); }
+      50% { box-shadow: 0 0 25px rgba(0,255,255,0.6); }
+    }
+
     .neon-glow-heading {
       animation: glow-heading 2s infinite alternate;
       text-shadow: 0 0 8px rgba(0,255,255,0.6);
     }
-    .animate-glow-card {
+    .hover\\:animate-glow-card:hover {
       animation: glow-card 2s infinite alternate;
+    }
+    .focus\\:animate-glow-search:focus {
+      animation: glow-search 2s infinite alternate;
+    }
+    .pulse-neon {
+      animation: pulse-neon 3s infinite alternate;
     }
   `}</style>
 </div>
