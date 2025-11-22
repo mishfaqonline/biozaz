@@ -5,7 +5,6 @@ const Contact = () => {
 return ( <section id="contact" className="py-16 px-4 max-w-6xl mx-auto"> <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center">
 Get in Touch </h2>
 
-```
   <div className="grid md:grid-cols-2 gap-6 mt-6 items-start">
     {/* Left Column: Google Map */}
     <div className="order-1 md:order-1 flex justify-center">
