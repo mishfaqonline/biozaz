@@ -18,7 +18,7 @@ const ProductsSection = ({ products = [], openProduct }) => {
 
       {/* Filter Buttons & Search */}
       <div className="flex flex-wrap gap-3 mb-8 items-center">
-        {["All", "Ultrasound", "Skincare", "Health Care IT"].map((cat) => (
+        {["All", "Ultrasound", "Skincare", "Healthcare IT"].map((cat) => (
           <button
             key={cat}
             onClick={() => setFilter(cat)}

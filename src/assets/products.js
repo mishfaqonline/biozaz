@@ -158,7 +158,7 @@ export const allProducts = [
 
 {
   id: 20,
-  category: "Health Care IT",
+  category: "Healthcare IT",
   name: "PACS System (Picture Archiving & Communication System)",
   images: [pacsImg2, pacsImg1],
   shortSpecs: [
@@ -191,7 +191,7 @@ export const allProducts = [
 
 {
   id: 21,
-  category: "Health Care IT",
+  category: "Healthcare IT",
   name: "Vitrea 3D Advanced Visualization Software",
   images: [vitreaImg1, vitreaImg1],
   shortSpecs: [
