@@ -1,4 +1,4 @@
-import canonAplioGo from "./img/ultrasound/canon_aplio_go.png";
+import canonAplioGo from "./img/ultrasound/canon_aplio_go.jpg";
 import toshibaAplio500 from "./img/ultrasound/toshiba_aplio_500.jpg";
 import xario from "./img/ultrasound/xario.jpg";
 
