@@ -1,752 +1,87 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Phone, Mail, MapPin, Sparkles, Clock, Users, Award, Server, ChevronLeft, ChevronRight, ScanLine, BrainCircuit, Radiation, Scan, Radio, Waves, Monitor, MessageCircle } from 'lucide-react';
-import image from '../src/images/logotm3.png'
-import { allimages } from './assets/img.js';
-import "./App.css"
-// Product images imported with ES modules
-import canonAplioGo from "./assets/img/ultrasound/canon_aplio_go.png";
-import toshibaAplio500 from "./assets/img/ultrasound/toshiba_aplio_500.jpg";
-import xario from "./assets/img/ultrasound/xario.jpg";
-// import emailjs from '@emailjs/browser'
+// File: src/App.jsx
+import React, { useState, useCallback } from "react";
+import image from "./images/logotm3.png";
+import Navbar from "./components/Navbar";
+import WhatsAppButton from "./components/WhatsAppButton";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import ProductsSection from "./components/ProductsSection";
+import Contact from "./pages/Contact";
+import ProductModal from "./components/ProductModal";
+import { allProducts } from "./assets/products"; // Correct import
+import { allimages } from "./assets/img"; // slider images
 
-export default function HospitalWebsite() {
-  // WhatsApp configuration constants
-  const WHATSAPP_CONFIG = {
-    number: '923364446339', // Country code + number without + or 00
-    defaultMessage: 'Hi! I\'m interested in your medical equipment services.',
-    position: 'bottom-6 right-6'
-  };
-
-  // Reusable WhatsApp button component with error handling
-  const WhatsAppButton = React.memo(() => {
-    const [isHovered, setIsHovered] = useState(false);
-
-    // Handle WhatsApp link generation with validation
-    const handleWhatsAppClick = (e) => {
-      try {
-        const { number, defaultMessage } = WHATSAPP_CONFIG;
-        if (!number || !/^92\d{10}$/.test(number)) {
-          console.warn('Invalid WhatsApp number format');
-          e.preventDefault();
-          return;
-        }
-        const whatsappUrl = `https://wa.me/${number}?text=${encodeURIComponent(defaultMessage)}`;
-        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-        e.preventDefault(); // Prevent default link behavior for better control
-      } catch (error) {
-        console.error('Error opening WhatsApp:', error);
-      }
-    };
-
-    return (
-      <button
-        onClick={handleWhatsAppClick}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        className={`fixed ${WHATSAPP_CONFIG.position} bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 flex items-center justify-center group z-50`}
-        aria-label="Chat on WhatsApp"
-        title="Chat with us on WhatsApp"
-      >
-        <MessageCircle className="w-6 h-6" />
-        {isHovered && (
-          <span className="absolute right-full mr-3 bg-gray-800 text-white px-3 py-1 rounded-md text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-            Chat on WhatsApp
-          </span>
-        )}
-      </button>
-    );
-  });
-
-  WhatsAppButton.displayName = 'WhatsAppButton';
-
-  const sliderImages = allimages;
-
-  const [currentIndex,setCurrentIndex] = useState(0)
-
-  useEffect(()=>{
-    const interval = setInterval(()=>{
-      setCurrentIndex((previndex) => (previndex + 1) % sliderImages.length);
-    },3000)
-    return () => clearInterval(interval)
-  },[sliderImages.length])
-
-  const goToPrevious = () => {
-      setCurrentIndex((prevIndex) => 
-        prevIndex === 0 ? sliderImages.length - 1 : prevIndex - 1
-      );
-    };
-
-    const goToNext = () => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % sliderImages.length);
-    };
-
-  // Add selectedProduct state (for modal)
+export default function App() {
+  const [currentPage, setCurrentPage] = useState("home");
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  // Add current page and menu open states
-  const [currentPage, setCurrentPage] = useState('home');
-  const [menuOpen, setMenuOpen] = useState(false);
+  const handleNavClick = useCallback((id) => {
+    setCurrentPage(id);
+    const section = document.getElementById(id);
+    if (section) {
+      const navbarHeight = 90;
+      const top = section.offsetTop - navbarHeight;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  }, []);
 
-  // NAVIGATION (Products added)
-  const navigation = [
-    { name: 'Home', id: 'home' },
-    { name: 'Products', id: 'products' },
-    { name: 'About', id: 'about' },
-    { name: 'Services', id: 'services' },
-    { name: 'Contact', id: 'contact' }
-  ];
-// product model
-const products = [
-  // ============================================================
-  // 1) CANON APLIO GO
-  // ============================================================
-  {
-    id: 1,
-    category: "Ultrasound",
-    name: "Canon Aplio Go",
-    images: [canonAplioGo, canonAplioGo], // Replace with correct sources
+  const openProduct = useCallback((product) => {
+    setSelectedProduct(product);
+  }, []);
 
-    shortSpecs: [
-      "17” HD Touchscreen Display",
-      "Advanced Doppler Imaging",
-      "AI-based Scan Assist",
-      "Lightweight Portable System"
-    ],
-
-    features: [
-      "Superb Micro-Vascular Imaging (SMI) for micro-flow analysis",
-      "Wide-range transducer compatibility",
-      "Advanced Tissue Harmonic Imaging",
-      "iBeam / ABeam intelligent beamforming",
-      "Wireless data transfer",
-      "Smart range + Auto Optimization",
-      "Ergonomic portable cart with adjustable height",
-      "Speckle Reduction Imaging (SRI)",
-      "High Frame Rate imaging technology"
-    ],
-
-    specs: {
-      display: "17-inch Full HD Touchscreen",
-      doppler: "Color, Power, Pulse Wave, Continuous Wave Doppler",
-      probes: "Linear, Convex, Cardiac, Endocavity",
-      imagingModes: "B-mode, M-mode, SMI, 4D, Elastography",
-      storage: "512GB SSD",
-      connectivity: "USB, WiFi, DICOM, LAN",
-      weight: "Less than 8 kg",
-    },
-
-    fullDetails: `
-      Canon Aplio Go is a powerful mobile ultrasound designed for modern medical imaging.
-      It features advanced Doppler technology, Canon’s Superb Micro-Vascular Imaging (SMI),
-      AI-based workflow automation, and high-resolution imaging for cardiac, abdominal,
-      musculoskeletal, and OB/GYN applications.
-
-      Its lightweight portable design and HD touch panel make it ideal for emergency rooms,
-      outpatient diagnostics, and bedside imaging.
-    `,
-
-    tags: ["ultrasound", "canon", "portable", "doppler"]
-  },
-
-  // ============================================================
-  // 2) TOSHIBA APLIO 500
-  // ============================================================
-  {
-    id: 2,
-    category: "Ultrasound",
-    name: "Toshiba Aplio 500",
-    images: [toshibaAplio500, toshibaAplio500],
-
-    shortSpecs: [
-      "Premium High-End System",
-      "Crystal-Clear Doppler Imaging",
-      "Advanced 4D Capabilities",
-      "High Frame Rate Processing"
-    ],
-
-    features: [
-      "Precision Imaging Engine with high dynamic range",
-      "Differential Tissue Harmonic Imaging (D-THI)",
-      "High-resolution 4D OB/GYN imaging",
-      "Elastography with shear wave measurement",
-      "Toshiba’s Smart Fusion real-time CT/MRI overlay",
-      "iStyle Productivity Suite for optimized workflow",
-      "Multimodality imaging support",
-      "Speckle Reduction + Contrast Harmonics",
-      "Advanced cardiac imaging package"
-    ],
-
-    specs: {
-      display: "19-inch HD LED Display",
-      doppler: "Color, PW, CW, Tissue Doppler",
-      probes: "Broad-spectrum convex, linear, phased array",
-      imagingModes: "2D, M-Mode, 3D/4D, Elastography, Fusion",
-      storage: "1TB Internal Storage",
-      connectivity: "DICOM, USB, DVD-RW, LAN",
-      weight: "Approx 85 kg",
-    },
-
-    fullDetails: `
-      Toshiba Aplio 500 is a flagship premium ultrasound platform widely used in hospitals
-      for radiology, cardiology, OB/GYN, vascular, and general imaging.
-
-      With its advanced imaging engine, smart workflow tools, elastography capabilities,
-      and superior Doppler sensitivity, it can deliver deep tissue penetration,
-      exceptional contrast resolution, and high diagnostic confidence.
-
-      Aplio 500 also supports advanced 4D imaging, making it a strong choice for fetal and gynecological imaging.
-    `,
-
-    tags: ["toshiba", "aplio", "ultrasound", "premium"]
-  },
-
-  // ============================================================
-  // 3) XARIO 200
-  // ============================================================
-  {
-    id: 3,
-    category: "Ultrasound",
-    name: "Xario 200",
-    images: [xario, xario],
-
-    shortSpecs: [
-      "Compact + High Performance",
-      "High-Resolution B-Mode",
-      "Energy-Efficient System",
-      "Smart Clinical Presets"
-    ],
-
-    features: [
-      "Toshiba Beamforming architecture",
-      "Precision imaging with depth enhancement",
-      "Quick Scan one-touch optimization",
-      "Doppler Auto-Tracing",
-      "Wide variety of transducers",
-      "Advanced fetal measurement tools",
-      "Speckle Noise Reduction Technology",
-      "Compact design for small clinics",
-      "Low power consumption"
-    ],
-
-    specs: {
-      display: "19-inch articulating HD monitor",
-      doppler: "Color, Power, Pulsed Wave Doppler",
-      probes: "Convex, Linear, Endocavity, Cardiac",
-      imagingModes: "2D, M-Mode, Doppler, ADF, Tissue Harmonics",
-      storage: "500GB Internal HDD",
-      connectivity: "DICOM, USB, LAN",
-      weight: "Approx 55 kg",
-    },
-
-    fullDetails: `
-      Xario 200 is a mid-range, performance-focused ultrasound system designed for clinics,
-      diagnostic centers, and hospitals that demand high-quality imaging at an affordable cost.
-
-      It offers excellent B-mode clarity, fast Doppler response, and Toshiba’s legendary
-      reliability. Smart presets and intuitive controls help sonographers achieve consistent,
-      high-quality results for abdominal, OB/GYN, MSK, cardiac, and vascular applications.
-
-      Its lightweight design and energy efficiency make it ideal for continuous clinical use.
-    `,
-
-    tags: ["xario", "ultrasound", "mid-range", "toshiba"]
-  }
-];
-
-
-  const services = [
-    {
-      icon: <Sparkles className="w-8 h-8 text-teal-500" />,
-      title: 'Skincare',
-      desc: 'Advanced aesthetic and dermatology devices for skin rejuvenation, laser hair removal, and overall skin health and glow.',
-      tagline: 'Where Technology Meets Timeless Beauty'
-    },
-    { icon: <Waves className="w-8 h-8" />, title: 'Ultrasound', desc: 'Sharper, faster, clearer — Portable Ultrasound that sets new standards.' },
-    { icon: <Monitor className="w-8 h-8" />, title: 'PACS', desc: 'Simplify diagnostics with next-generation PACS technology.' },
-    { icon: <Server className="w-8 h-8" />, title: 'Healthcare IT Services', desc: 'Empowering healthcare with innovative digital solutions' },
-    { icon: <BrainCircuit className="w-8 h-8" />, title: 'Vitrea', desc: 'Vitrea by Biozaz — visualizing the future of healthcare.' },
-  ];
-
-  // Product modal component
- const ProductModal = ({ product, onClose }) => {
-  if (!product) return null;
+  const closeProduct = useCallback(() => {
+    setSelectedProduct(null);
+  }, []);
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50 p-4">
-      <div className="bg-white w-full max-w-4xl rounded-xl shadow-xl overflow-y-auto max-h-[90vh] p-6 animate-fadeIn">
+    <div className="bg-gray-50">
+      {/* Navbar */}
+      <Navbar
+        navigation={[
+          { name: "Home", id: "home" },
+          { name: "Products", id: "products" },
+          { name: "About", id: "about" },
+          { name: "Services", id: "services" },
+          { name: "Contact", id: "contact" },
+        ]}
+        currentPage={currentPage}
+        onNavClick={handleNavClick}
+      />
 
-        {/* Close button */}
-        <button onClick={onClose} className="float-right text-gray-500 hover:text-black">
-          ✖
-        </button>
-
-        {/* Image Gallery */}
-        <div className="flex space-x-3 overflow-x-auto pb-3">
-          {product.images.map((img, i) => (
-            <img
-              key={i}
-              src={img}
-              className="h-52 object-contain rounded-lg border cursor-pointer hover:scale-105 transition"
-            />
-          ))}
-        </div>
-
-        <h2 className="text-3xl font-bold mt-4">{product.name}</h2>
-
-        <p className="text-gray-700 mt-3">{product.fullDetails}</p>
-
-        {/* Specifications */}
-        <h3 className="text-xl font-semibold mt-6">Technical Specifications</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3 text-gray-700">
-          {Object.entries(product.specs).map(([key, value]) => (
-            <div key={key} className="bg-gray-100 p-3 rounded-lg">
-              <strong className="capitalize">{key}:</strong> {value}
-            </div>
-          ))}
-        </div>
-
-        {/* Features */}
-        <h3 className="text-xl font-semibold mt-6">Features</h3>
-        <ul className="list-disc pl-6 text-gray-700 space-y-1 mt-2">
-          {product.features.map((f, i) => (
-            <li key={i}>{f}</li>
-          ))}
-        </ul>
-
-        {/* Buttons */}
-        <div className="flex space-x-3 mt-6">
-          <button
-            onClick={onClose}
-            className="flex-1 bg-gray-600 hover:bg-gray-700 text-white py-3 rounded-lg font-semibold"
-          >
-            Close
-          </button>
-
-          <a
-            href={`https://wa.me/923364446339?text=Hello, I'm interested in ${product.name}`}
-            target="_blank"
-            className="flex-1 bg-teal-600 hover:bg-teal-700 text-white text-center py-3 rounded-lg font-semibold"
-          >
-            Inquire on WhatsApp
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-
- // Pages (Home, About, Contact) — unchanged except Products will be inserted between About and Contact
-  const HomePage = () => (
-    <div id="home">
-   {/* Hero Section with Slider */}
-      <section className="bg-gradient-to-br from-teal-50 to-cyan-50 py-12 md:py-20 px-4">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          {/* Left Side - Text */}
-          <div className="space-y-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 leading-tight">
-              Welcome to <span className="text-teal-600">Biozaz</span>
-            </h1>
-            <h4 className="text-xl md:text-2xl text-gray-700 font-semibold">
-              Medical Devices & Healthcare Technology
-            </h4>
-            <p className="text-gray-600 leading-relaxed text-lg">
-        Here we offer a complete range of high-quality medical, biomedical, and aesthetic equipment.
-  From portable ultrasound systems to advanced imaging solutions, our products are sourced from 
-  trusted brands to ensure precision, reliability, and value for every healthcare facility. 
-  We also provide cutting-edge skincare designed for skin rejuvenation, 
-  laser hair removal, dermatology treatments, and aesthetic innovations — bringing science and beauty 
-  together for healthier, glowing skin. Additionally, our PACS solutions, Vitrea software, and 
-  healthcare IT services empower hospitals and clinics with smarter workflow management, seamless 
-  image sharing, and advanced diagnostic visualization.
-            </p>
-          </div>
-
-
-          <div className="relative rounded-xl overflow-hidden shadow-2xl group">
-            <div className="relative h-72 md:h-96">
-              <img
-                src={sliderImages[currentIndex]}
-                alt="Medical Equipment"
-                className="w-full h-full object-cover transition-all duration-700 ease-in-out"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-            </div>
-
-            <button
-              onClick={goToPrevious}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-
-            <button
-              onClick={goToNext}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-              {sliderImages.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-all ${index === currentIndex ? 'bg-teal-500 w-8' : 'bg-white/60 hover:bg-white'}`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <div id="services" className="max-w-6xl mx-auto py-16 px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Our Services</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {services.map((service, idx) => (
-            <div key={idx} className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center border-t-4 border-teal-500">
-              <div className="text-teal-500 flex justify-center mb-4">{service.icon}</div>
-              <h3 className="text-xl font-bold mb-2 text-gray-800">{service.title}</h3>
-              <p className="text-gray-600">{service.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Stats Section */}
-      <div className="bg-cyan-50 py-16 px-4">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-          <div>
-            <div className="text-4xl font-bold text-teal-600 mb-2">50+</div>
-            <div className="text-gray-700 text-lg">Expert Engineers</div>
-          </div>
-          <div>
-            <div className="text-4xl font-bold text-teal-600 mb-2">1000+</div>
-            <div className="text-gray-700 text-lg">Satisfied Clients</div>
-          </div>
-          <div>
-            <div className="text-4xl font-bold text-teal-600 mb-2">22+</div>
-            <div className="text-gray-700 text-lg">Years Experience</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  const AboutPage = () => (
-    <div id="about" className="max-w-6xl mx-auto py-16 px-4">
-      <h1 className="text-4xl md:text-5xl font-bold text-center mb-8 text-gray-800">About Us</h1>
-      
-      <div className="bg-gradient-to-r from-teal-500 to-cyan-400 text-white p-8 md:p-12 rounded-lg mb-12">
-        <h2 className="text-3xl font-bold mb-4">Our Mission</h2>
-        <p className="text-lg leading-relaxed">
-          To provide exceptional healthcare services with compassion, dignity, and respect. We are committed to improving the health and well-being of our community through innovative medical care and patient-centered service.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-        <div className="bg-white p-8 rounded-lg shadow-lg">
-          <Users className="w-12 h-12 text-teal-500 mb-4" />
-          <h3 className="text-2xl font-bold mb-4 text-gray-800">Our Team</h3>
-          <p className="text-gray-600 leading-relaxed">
-            Our Engineers diversified is staffed with highly qualified medical professionals dedicated to providing the best care possible. From specialists to support staff, every team member plays a vital role in patient care.
-          </p>
-        </div>
-
-        <div className="bg-white p-8 rounded-lg shadow-lg">
-          <Award className="w-12 h-12 text-teal-500 mb-4" />
-          <h3 className="text-2xl font-bold mb-4 text-gray-800">Our Vision</h3>
-          <p className="text-gray-600 leading-relaxed">
-            To deliver the highest standards of customer service, superior quality, and cutting-edge technological solutions that empower healthcare professionals worldwide.
-          </p>
-        </div>
-      </div>
-
-      <div id="about" className="max-w-6xl mx-auto py-16 px-4">
-      <h1 className="text-4xl md:text-5xl font-bold text-center mb-8 text-gray-800">Our History</h1>
-        <p className="text-gray-700 leading-relaxed mb-4">
-           BIOZAZ (Pvt) Ltd is a Pakistan-based company headquartered in Karachi, specializing in the import and export of advanced Medical Devices and IT Solutions for the healthcare industry.
-
-We offer a diverse range of medical equipment, including portable ultrasound systems, diagnostic imaging devices, skincare lasers, and other innovative portable technologies.
-
-Our IT services , PACS Solutions, Web Applications, and Hospital Management Systems, tailored to meet the evolving needs of modern healthcare facilities.
-        </p>
-        <p className="text-gray-700 leading-relaxed">
-          Throughout our journey, we have remained committed to our founding principles of compassionate care, medical excellence, and community service. Today, we continue to expand our services to meet the evolving healthcare needs of our patients.
-        </p>
-      </div>
-    </div>
-  );
-
-  // ProductsSection component
-const ProductsSection = () => {
-  const [filter, setFilter] = useState("All");
-  const [search, setSearch] = useState("");
-
-  // Filter + Search Logic
-  const filteredProducts = products.filter(p =>
-    (filter === "All" || p.category === filter) &&
-    p.name.toLowerCase().includes(search.toLowerCase())
-  );
-
-  return (
-    <div id="products" className="max-w-6xl mx-auto py-16 px-4">
-      <h2 className="text-4xl font-bold text-center mb-10 text-gray-800">
-        Our Products
-      </h2>
-
-      {/* 🔵 Filters + Search */}
-      <div className="flex flex-wrap gap-3 mb-8 items-center">
-
-        {["All", "Ultrasound", "Skincare", "PACS"].map(cat => (
-          <button
-            key={cat}
-            onClick={() => setFilter(cat)}
-            className={`px-4 py-2 rounded-full border transition ${
-              filter === cat
-                ? "bg-teal-600 text-white border-teal-600"
-                : "bg-white text-gray-700 hover:bg-gray-100"
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
-
-        {/* Search Bar */}
-        <input
-          type="text"
-          placeholder="Search products..."
-          onChange={(e) => setSearch(e.target.value)}
-          className="ml-auto px-4 py-2 border rounded-lg w-full md:w-64"
-        />
-      </div>
-
-      {/* 🔵 Products Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {filteredProducts.map((product) => (
-          // ⚠️ Paste your NEW product card component here
-          <div
-            key={product.id}
-            className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition group"
-          >
-            <div className="overflow-hidden rounded-t-xl">
-              <img 
-                src={product.images[0]}
-                className="w-full h-52 object-cover group-hover:scale-110 transition duration-500"
-              />
-            </div>
-
-            <div className="p-5">
-              <span className="text-xs font-semibold text-teal-600 bg-teal-100 px-3 py-1 rounded-full">
-                {product.category}
-              </span>
-
-              <h3 className="text-xl font-bold text-gray-800 mt-3">
-                {product.name}
-              </h3>
-
-              <ul className="text-gray-600 text-sm space-y-1 mt-3">
-                {product.shortSpecs.map((spec, i) => (
-                  <li key={i} className="flex items-center">
-                    <span className="w-2 h-2 bg-teal-500 rounded-full mr-2"></span>
-                    {spec}
-                  </li>
-                ))}
-              </ul>
-
-              <button
-                onClick={() => setSelectedProduct(product)}
-                className="mt-5 w-full bg-teal-600 hover:bg-teal-700 text-white py-2 rounded-lg font-semibold transition"
-              >
-                View Details
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-
-  const ContactPage = () => {
-    const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
-
-    const handleSubmit = (e) => {
-      // commented out emailjs usage left unchanged
-    };
-
-    return (
-      <div id="contact" className="max-w-6xl mx-auto py-16 px-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-800">Contact Us</h1>
-        
-        <div>
-          <div className="bg-white p-8 rounded-lg shadow-lg">
-            <form onSubmit={handleSubmit}>
-              {/* form is intentionally left commented */}
-            </form>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 items-start">
-            <div id="location" className="order-1 md:order-1 flex justify-center">
-              <iframe
-                title="Biozaz Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d268.7493940846305!2d67.04195168893736!3d25.005333594470034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33f7034cbd2d9%3A0x3f591062b06cf2dd!2sBiozaz!5e0!3m2!1sen!2s!4v1761658722214!5m2!1sen!2s"
-                className="w-full h-80 max-w-xl rounded-lg shadow-lg border-0"
-                style={{ minHeight: 280 }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
-
-            <div className="order-2 md:order-2 space-y-6">
-              <div className="bg-gradient-to-br from-teal-500 to-cyan-400 text-white p-8 rounded-lg">
-                <h2 className="text-2xl font-bold mb-6">Get in Touch</h2>
-
-                <div className="flex items-start mb-4">
-                  <MapPin className="w-6 h-6 mr-4 mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold mb-1">Address</h3>
-                    <p>G2 13A-A, SMCHS Karachi, Pakistan 75400</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start mb-4">
-                  <Phone className="w-6 h-6 mr-4 mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold mb-1">Phone</h3>
-                    <p>+92 336 4446339</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start mb-4">
-                  <Mail className="w-6 h-6 mr-4 mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold mb-1">Email</h3>
-                    <p>info@biozaz.com</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <Clock className="w-6 h-6 mr-4 mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold mb-1">Working Hours</h3>
-                    <p>24/7 Services</p>
-                    <p>Head Office Mon-Sat, 9AM-5PM</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-cyan-50 p-6 rounded-lg">
-                <h3 className="text-xl font-bold mb-3 text-gray-800">Emergency?</h3>
-                <p className="text-gray-700 mb-4">"Our support team is on standby 24/7 to deliver reliable assistance whenever you need it."</p>
-                <a href="tel:+921234567890" className="inline-block bg-red-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-600 transition">
-                  For On-Call Service: +92 336 4446339
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  // single-page nav: set active section and smooth-scroll to section id
-  const handleNavClick = (id) => {
-    setCurrentPage(id); // used for nav highlight
-    setMenuOpen(false);
-    setTimeout(() => {
-      if (id === 'home') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        return;
-      }
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 50);
-  };
-
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Navigation */}
-      <nav className="backdrop-blur-md bg-gradient-to-r from-white/80 via-teal-50/70 to-white/80 shadow-lg sticky top-0 z-50 border-b border-teal-100 rounded-b-2xl transition-all duration-300">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex justify-between items-center py-3">
-            <div className="flex items-center space-x-2">
-              <img src={image} alt="Biozaz Logo" className="w-40 h-25 rounded-full drop-shadow-md" />
-            </div>
-
-            <div className="hidden md:flex space-x-8">
-              {navigation.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => handleNavClick(item.id)}
-                  className={`relative font-semibold tracking-wide transition-all duration-300 pb-1 
-                  ${
-                    currentPage === item.id
-                      ? 'text-teal-600 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-teal-500'
-                      : 'text-gray-700 hover:text-teal-600 hover:after:w-full hover:after:bg-teal-400'
-                  } after:transition-all after:duration-300 after:w-0 after:h-[2px] after:bg-transparent after:left-0 after:bottom-0`}
-                >
-                  {item.name}
-                </button>
-              ))}
-            </div>
-
-            <button
-              className="md:hidden text-gray-700 hover:text-teal-600 transition-all"
-              onClick={() => setMenuOpen(!menuOpen)}
-            >
-              {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-
-          {menuOpen && (
-            <div className="md:hidden pb-4 animate-fadeIn bg-white/70 backdrop-blur-md rounded-xl shadow-inner">
-              {navigation.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => handleNavClick(item.id)}
-                  className={`block w-full text-left py-2 px-3 rounded-md font-semibold transition-all duration-200 ${
-                    currentPage === item.id
-                      ? 'text-teal-600 bg-teal-50'
-                      : 'text-gray-700 hover:bg-teal-100 hover:text-teal-600'
-                  }`}
-                >
-                  {item.name}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      </nav>
-
-      {/* WhatsApp Floating Action Button */}
+      {/* WhatsApp Button */}
       <WhatsAppButton />
 
-      {/* Modal - if selected product */}
+      {/* Product Modal */}
       {selectedProduct && (
-        <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
+        <ProductModal product={selectedProduct} onClose={closeProduct} />
       )}
 
-      {/* Page Content */}
-      <HomePage />
-      <AboutPage />
-      <ProductsSection />
-      <ContactPage />
+      {/* Main Sections */}
+      <div id="home">
+        <Home sliderImages={allimages} />
+      </div>
+
+      <div id="about">
+        <About />
+      </div>
+
+      <div id="products">
+        {/* Pass the correctly imported allProducts */}
+        <ProductsSection products={allProducts} openProduct={openProduct} />
+      </div>
+
+      <div id="contact">
+        <Contact />
+      </div>
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-10 px-4 border-t border-teal-600/20">
         <div className="max-w-6xl mx-auto text-center">
-          <div className="flex justify-center items-center mb-4 space-x-2">
-            <h2 className="text-2xl font-bold flex items-center">
-              <span className="text-teal-400">Biozaz</span>
-              <span className="text-xs align-top ml-1 text-gray-400">™</span>
-            </h2>
-          </div>
-
-          <p className="text-gray-400 mb-2">
+          <h2 className="text-2xl font-bold">
+            <span className="text-teal-400">Biozaz</span>
+            <span className="text-xs align-top ml-1 text-gray-400">™</span>
+          </h2>
+          <p className="text-gray-400 mt-2">
             Your trusted partner in medical equipment and healthcare solutions.
           </p>
           <p className="text-gray-500 text-sm">© 2025 Biozaz.com All rights reserved.</p>
@@ -757,4 +92,4 @@ const ProductsSection = () => {
       </footer>
     </div>
   );
-} 
+}
