@@ -27,7 +27,6 @@ return ( <div className="relative rounded-xl overflow-hidden shadow-2xl group"> 
        className="w-full h-full object-cover transition-all duration-700 ease-in-out"
      /> <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div> </div>
 
-```
   {/* Navigation Buttons */}
   <button
     onClick={goToPrevious}
