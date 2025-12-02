@@ -174,38 +174,49 @@ export const allProducts = [
   // -----------------------
   // HEALTHCARE IT PRODUCTS
   // -----------------------
-  {
-    id: 20,
-    category: "Healthcare IT",
-    name: "PACS System",
-    images: [pacsImg2, pacsImg1],
-    shortSpecs: [
-      "High-Speed Image Storage",
-      "Multi-Modality Support",
-      "HL7 & DICOM Compatible",
-      "Secure Cloud & Local Options"
-    ],
-    features: [
-      "Instant access to radiology images from any workstation",
-      "Supports CT, MRI, Ultrasound, X-Ray",
-      "Encrypted secure sharing across departments",
-      "AI-assisted workflow optimization",
-      "Automatic image routing & backup",
-      "Multi-user dashboards and reporting"
-    ],
-    specs: {
-      storage: "Up to 50TB, expandable to 200TB",
-      modalities: "CT, MRI, Ultrasound, CR/DR, Fluoroscopy",
-      compliance: "DICOM 3.0, HL7",
-      server: "Linux/Windows, RAID 5/6",
-      backup: "Cloud + Local hybrid",
-      viewing: "Web & Desktop clients",
-      networking: "1Gbps / 10Gbps",
-      warranty: "2 Year Service Warranty"
-    },
-    fullDetails:
-      "Our PACS system enables hospitals and clinics to store, retrieve, and securely share medical images instantly. It supports multi-modality integration, high-speed access, and AI-assisted workflow for radiologists."
+ {
+  id: 20,
+  category: "Healthcare IT",
+  name: "BIOZAZ Web-Based Zero Footprint PACS & DICOM Viewer",
+  images: [pacsImg2, pacsImg1], // keep your existing images
+  shortSpecs: [
+    "Zero-Footprint Web Viewer (No installation required)",
+    "Supports CT, MRI, Ultrasound, X-Ray, CR/DR, Fluoroscopy, OPG",
+    "AI-assisted workflow optimization",
+    "Encrypted & secure image sharing",
+    "Hybrid Cloud + Local Backup"
+  ],
+  features: [
+    "Instant access to radiology images from any device",
+    "AI-assisted workflow for radiologists",
+    "Advanced tools: MPR, cine loops, annotations, measurements",
+    "Study comparison and reporting tools",
+    "Automated image routing, archiving, and backup",
+    "Multi-user dashboards with role-based access",
+    "Fully tele-radiology ready for remote reporting",
+    "Mobile and desktop friendly interface"
+  ],
+  specs: {
+    storage: "50TB base, expandable to 200TB",
+    modalities: "CT, MRI, Ultrasound, X-Ray, CR/DR, Fluoroscopy, OPG",
+    compliance: "DICOM 3.0, HL7, IHE",
+    server: "Linux / Windows environment",
+    dataProtection: "RAID 5/6 support",
+    backup: "Hybrid Cloud + Local redundancy",
+    networking: "1Gbps / 10Gbps",
+    viewerOptions: "Web-based zero-footprint viewer + optional desktop client",
+    warranty: "2-Year service warranty (extendable)"
   },
+  fullDetails:
+    "BIOZAZ proudly presents its advanced Web-Based Zero Footprint PACS & DICOM Viewer, a complete imaging solution designed to enhance radiology workflows for hospitals, clinics, and diagnostic centers. Built with modern web technologies, BIOZAZ PACS allows secure, high-speed access to medical images without the need for software installation or heavy hardware. Radiologists, clinicians, and technicians can access studies anytime, anywhere, using only a web browser. \n\n" +
+    "Our PACS system supports all major imaging modalities—including CT, MRI, Ultrasound, X-Ray, CR/DR, Fluoroscopy, and OPG—and delivers smooth, reliable performance even for large datasets. With AI-assisted workflow tools, automated routing, a zero-footprint viewer, and seamless integration with HIS/RIS/EMR systems, BIOZAZ PACS ensures a digital, efficient, and patient-friendly imaging environment. \n\n" +
+    "Benefits for Healthcare Facilities:\n" +
+    "- Hospitals: Centralized archive, eliminates film/CD costs, scalable multi-site operations\n" +
+    "- Radiologists: Faster study access, efficient reporting tools, tele-radiology ready\n" +
+    "- Patients: Quick report delivery, better diagnostic turnaround, convenient digital access\n\n" +
+    "Ideal for small, medium, and large hospitals, diagnostic & imaging centers, tele-radiology services, mobile imaging units, and specialized clinics such as Orthopedics, Oncology, and Cardiology."
+},
+
   {
     id: 21,
     category: "Healthcare IT",
