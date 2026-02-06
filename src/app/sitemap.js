@@ -4,10 +4,9 @@ import { createSupabaseServerClient } from "../utils/supabaseServer";
 export default async function sitemap() {
   const baseUrl = "https://biozaz.com";
   const supabase = createSupabaseServerClient();
-  const { data: products = [] } = await supabase
-    .from("products")
-    .select("*")
-    .order("id", { ascending: true });
+  const products = supabase
+    ? (await supabase.from("products").select("*").order("id", { ascending: true })).data || []
+    : [];
 
   const staticRoutes = [
     "",
