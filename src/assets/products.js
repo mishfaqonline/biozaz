@@ -16,7 +16,22 @@ export const allProducts = [
     id: 1,
     category: "Ultrasound",
     name: "Canon Aplio Go",
+    slug: "canon-aplio-go-ultrasound",
+    metaTitle: "Canon Aplio Go Ultrasound System | Biozaz",
+    metaDescription:
+      "Portable Canon Aplio Go ultrasound with SMI, AI scan assist, and multi-probe support for clinics, hospitals, and mobile imaging.",
+    keywords: [
+      "Canon Aplio Go",
+      "portable ultrasound system",
+      "SMI ultrasound",
+      "AI scan assist",
+      "diagnostic ultrasound"
+    ],
     images: [canonAplioGo, canonAplioGo],
+    imageAlts: [
+      "Canon Aplio Go portable ultrasound system",
+      "Canon Aplio Go ultrasound console side view"
+    ],
     shortSpecs: [
       "17” HD Touchscreen",
       "Advanced Doppler Imaging",
@@ -46,7 +61,22 @@ export const allProducts = [
     id: 2,
     category: "Ultrasound",
     name: "Toshiba Aplio 500",
+    slug: "toshiba-aplio-500-ultrasound",
+    metaTitle: "Toshiba Aplio 500 Ultrasound | Biozaz",
+    metaDescription:
+      "High-end Toshiba Aplio 500 ultrasound with elastography and advanced Doppler imaging for precise multi-specialty diagnostics.",
+    keywords: [
+      "Toshiba Aplio 500",
+      "high-end ultrasound",
+      "elastography ultrasound",
+      "Doppler imaging",
+      "diagnostic imaging system"
+    ],
     images: [toshibaAplio500, toshibaAplio500],
+    imageAlts: [
+      "Toshiba Aplio 500 ultrasound system front view",
+      "Toshiba Aplio 500 ultrasound console"
+    ],
     shortSpecs: [
       "Premium High-End System",
       "Crystal-Clear Doppler Imaging",
@@ -76,7 +106,22 @@ export const allProducts = [
     id: 3,
     category: "Ultrasound",
     name: "Xario 200",
+    slug: "xario-200-ultrasound",
+    metaTitle: "Xario 200 Ultrasound System | Biozaz",
+    metaDescription:
+      "Compact Xario 200 ultrasound with high-resolution B-mode, fast optimization, and versatile probe support for clinics and hospitals.",
+    keywords: [
+      "Xario 200",
+      "compact ultrasound",
+      "B-mode ultrasound",
+      "portable imaging system",
+      "clinical ultrasound"
+    ],
     images: [xario, xario],
+    imageAlts: [
+      "Xario 200 ultrasound system monitor and console",
+      "Xario 200 compact ultrasound machine"
+    ],
     shortSpecs: [
       "Compact High-Performance Design",
       "High-Resolution B-Mode",
@@ -110,7 +155,22 @@ export const allProducts = [
     id: 10,
     category: "Skincare",
     name: "Professional Hydrafacial Machine",
+    slug: "professional-hydrafacial-machine",
+    metaTitle: "Professional Hydrafacial Machine | Biozaz",
+    metaDescription:
+      "3-in-1 hydrafacial machine for deep cleansing, exfoliation, and hydration with LED therapy—ideal for salons and clinics.",
+    keywords: [
+      "hydrafacial machine",
+      "hydro-dermabrasion",
+      "skin rejuvenation",
+      "LED therapy",
+      "professional skincare device"
+    ],
     images: [hydrafacial1, hydrafacial2],
+    imageAlts: [
+      "Professional hydrafacial machine front view",
+      "Hydrafacial device with touchscreen and treatment handles"
+    ],
     shortSpecs: [
       "3-in-1 Hydro-Dermabrasion",
       "Deep Cleansing & Exfoliation",
@@ -142,7 +202,22 @@ export const allProducts = [
     id: 11,
     category: "Skincare",
     name: "SHR IPL OPT Hair Removal with Pico Laser",
+    slug: "shr-ipl-opt-hair-removal-pico-laser",
+    metaTitle: "SHR IPL OPT Hair Removal with Pico Laser | Biozaz",
+    metaDescription:
+      "Multi-mode SHR/IPL/OPT hair removal with Pico laser for pigmentation treatment, fast shots, and cooling comfort.",
+    keywords: [
+      "SHR hair removal",
+      "IPL hair removal machine",
+      "OPT cooling technology",
+      "pico laser",
+      "beauty clinic equipment"
+    ],
     images: [shripl, shripl],
+    imageAlts: [
+      "SHR IPL OPT hair removal machine with pico laser",
+      "Professional hair removal system with cooling handle"
+    ],
     shortSpecs: [
       "SHR Super Hair Removal",
       "OPT Cooling Technology",
@@ -178,7 +253,22 @@ export const allProducts = [
   id: 20,
   category: "Healthcare IT",
   name: "BIOZAZ Web-Based Zero Footprint PACS & DICOM Viewer",
+  slug: "biozaz-web-based-pacs-dicom-viewer",
+  metaTitle: "BIOZAZ Web-Based PACS & DICOM Viewer | Biozaz",
+  metaDescription:
+    "Zero-footprint web PACS & DICOM viewer with AI workflows, secure sharing, and hybrid cloud backup for hospitals and clinics.",
+  keywords: [
+    "web based PACS",
+    "DICOM viewer",
+    "zero footprint PACS",
+    "radiology workflow",
+    "medical imaging software"
+  ],
   images: [pacsImg2, pacsImg1], // keep your existing images
+  imageAlts: [
+    "BIOZAZ web-based PACS and DICOM viewer interface",
+    "PACS workstation dashboard for radiology imaging"
+  ],
   shortSpecs: [
     "Zero-Footprint Web Viewer (No installation required)",
     "Supports CT, MRI, Ultrasound, X-Ray, CR/DR, Fluoroscopy, OPG",
@@ -221,7 +311,22 @@ export const allProducts = [
     id: 21,
     category: "Healthcare IT",
     name: "Vitrea 3D Visualization Software",
+    slug: "vitrea-3d-visualization-software",
+    metaTitle: "Vitrea 3D/4D Visualization Software | Biozaz",
+    metaDescription:
+      "Vitrea 3D/4D visualization with AI-assisted reconstruction and multi-modality support for advanced radiology imaging.",
+    keywords: [
+      "Vitrea 3D visualization",
+      "medical imaging software",
+      "3D reconstruction",
+      "radiology visualization",
+      "CT MRI PET ultrasound"
+    ],
     images: [vitreaImg1, vitreaImg1],
+    imageAlts: [
+      "Vitrea 3D visualization software interface",
+      "3D medical imaging reconstruction view in Vitrea"
+    ],
     shortSpecs: [
       "3D/4D Medical Imaging",
       "AI-Powered Visualization",

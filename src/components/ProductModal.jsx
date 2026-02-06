@@ -1,5 +1,7 @@
+"use client";
+
 import React, { useEffect, useState, useCallback } from "react";
-import { ArrowBigRightIcon, ChevronLeft, ChevronRight, MessageCircle, MessageCircleIcon, MessageSquareTextIcon, RotateCw } from "lucide-react";
+import { ArrowBigRightIcon, ChevronLeft, ChevronRight, MessageCircle, RotateCw } from "lucide-react";
 import { allProducts } from "../assets/products";
 
 function ProductModal({ product, onClose }) {
@@ -65,8 +67,8 @@ return ( <div className="fixed inset-0 bg-black/80 backdrop-blur-xl z-50 flex ju
       {currentProduct.images?.length > 0 && (
         <div className="relative w-full h-[35vh] md:h-[50%] flex items-center justify-center overflow-hidden">
           <img
-            src={currentProduct.images[currentImage]}
-            alt={currentProduct.name}
+            src={currentProduct.images?.[currentImage]?.src || currentProduct.images?.[currentImage]}
+            alt={currentProduct.imageAlts?.[currentImage] || currentProduct.name}
             className="w-full h-full object-contain rounded-2xl shadow-[0_0_30px_rgba(0,255,255,0.5)] transition-transform slider-img"
           />
           {currentProduct.images.length > 1 && (

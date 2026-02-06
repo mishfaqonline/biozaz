@@ -1,3 +1,5 @@
+"use client";
+
 // File: src/components/WhatsAppButton.jsx
 import React, { useState } from 'react';
 import { MessageCircle } from 'lucide-react';

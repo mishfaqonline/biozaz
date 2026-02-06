@@ -3,18 +3,23 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "start": "vite"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.95.3",
+    "jspdf": "^4.1.0",
     "lucide-react": "^0.548.0",
+    "next": "^16.1.6",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.71.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.3.1",
-    "vite": "^7.1.7"
+    "@eslint/eslintrc": "^3.2.0",
+    "eslint": "^9.12.0",
+    "eslint-config-next": "^16.1.6"
   }
 }

@@ -1,6 +1,5 @@
-/* --------------------------------------------------
-   GLOBAL RESET
--------------------------------------------------- */
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -9,18 +8,14 @@
 
 html, body {
   scroll-behavior: smooth;
-  font-family: "Inter", sans-serif;
-  background-color: #f9fafb;
+  font-family: "Source Sans 3", sans-serif;
+  background-color: #f4f7fb;
 }
 
-/* Hide scroll when modal opens */
 body.no-scroll {
   overflow: hidden;
 }
 
-/* --------------------------------------------------
-   NAVBAR
--------------------------------------------------- */
 nav button {
   position: relative;
   transition: color 0.25s ease-in-out;
@@ -33,7 +28,7 @@ nav button::after {
   left: 0;
   height: 2px;
   width: 0;
-  background-color: #14b8a6;
+  background-color: #0ea5e9;
   transition: width 0.3s ease;
 }
 
@@ -42,7 +37,6 @@ nav button.active::after {
   width: 100%;
 }
 
-/* Mobile menu fade-in */
 .animate-mobile-menu {
   animation: mobileMenu 0.35s ease forwards;
 }
@@ -58,9 +52,6 @@ nav button.active::after {
   }
 }
 
-/* --------------------------------------------------
-   HERO SLIDER
--------------------------------------------------- */
 .slider-img {
   animation: fadeSlide 0.8s ease;
 }
@@ -76,30 +67,23 @@ nav button.active::after {
   }
 }
 
-/* Slider dots */
 .slider-dot {
   transition: all 0.35s ease;
 }
 .slider-dot.active {
   width: 24px;
-  background-color: #14b8a6;
+  background-color: #0ea5e9;
 }
 
-/* --------------------------------------------------
-   PRODUCT CARDS
--------------------------------------------------- */
 .product-card {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .product-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(0, 128, 128, 0.2);
+  box-shadow: 0 12px 30px rgba(14, 165, 233, 0.18);
 }
 
-/* --------------------------------------------------
-   PRODUCT MODAL
--------------------------------------------------- */
 .modal-bg {
   animation: fadeInBG 0.25s ease forwards;
 }
@@ -128,9 +112,6 @@ nav button.active::after {
   }
 }
 
-/* --------------------------------------------------
-   WHATSAPP FLOATING BUTTON
--------------------------------------------------- */
 .whatsapp-float {
   transition: all 0.25s ease;
 }
@@ -140,7 +121,6 @@ nav button.active::after {
   box-shadow: 0 10px 25px rgba(0, 200, 0, 0.35);
 }
 
-/* Tooltip */
 .whatsapp-tooltip {
   opacity: 0;
   transform: translateX(10px);
@@ -152,9 +132,6 @@ nav button.active::after {
   transform: translateX(0);
 }
 
-/* --------------------------------------------------
-   SECTION TITLES
--------------------------------------------------- */
 .section-title {
   position: relative;
   display: inline-block;
@@ -168,23 +145,19 @@ nav button.active::after {
   bottom: 0;
   height: 3px;
   width: 60px;
-  background-color: #14b8a6;
+  background-color: #0ea5e9;
   transform: translateX(-50%);
   border-radius: 2px;
 }
 
-/* --------------------------------------------------
-   FOOTER
--------------------------------------------------- */
 footer p, footer a {
   transition: color 0.25s ease;
 }
 
 footer a:hover {
-  color: #14b8a6;
+  color: #38bdf8;
 }
 
-/* Small Fade animation utility */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }

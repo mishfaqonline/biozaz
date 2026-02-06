@@ -1,4 +1,7 @@
+"use client";
+
 import React, { useEffect, useState, useCallback } from 'react';
+import Image from "next/image";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default React.memo(function Slider({ images }) {
@@ -20,23 +23,29 @@ const goToNext = useCallback(() => {
 setCurrentIndex((prev) => (prev + 1) % images.length);
 }, [images.length]);
 
-return ( <div className="relative rounded-xl overflow-hidden shadow-2xl group"> <div className="relative h-72 md:h-96"> <img
-       src={images[currentIndex]}
+const currentImage = images[currentIndex];
+
+return ( <div className="relative rounded-xl overflow-hidden shadow-lg group"> <div className="relative h-72 md:h-96"> 
+     <Image
+       src={currentImage}
        alt="Medical Equipment"
-       loading="lazy"
-       className="w-full h-full object-cover transition-all duration-700 ease-in-out"
-     /> <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div> </div>
+       fill
+       sizes="(max-width: 768px) 100vw, 50vw"
+       className="object-cover transition-all duration-700 ease-in-out"
+     /> 
+     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-slate-900/10 to-transparent"></div> 
+   </div>
 
   {/* Navigation Buttons */}
   <button
     onClick={goToPrevious}
-    className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+    className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-slate-800 p-2 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
   >
     <ChevronLeft className="w-6 h-6" />
   </button>
   <button
     onClick={goToNext}
-    className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+    className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-slate-800 p-2 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
   >
     <ChevronRight className="w-6 h-6" />
   </button>
@@ -48,7 +57,7 @@ return ( <div className="relative rounded-xl overflow-hidden shadow-2xl group"> 
         key={idx}
         onClick={() => setCurrentIndex(idx)}
         className={`w-3 h-3 rounded-full transition-all ${
-          idx === currentIndex ? 'bg-teal-500 w-8' : 'bg-white/60 hover:bg-white'
+          idx === currentIndex ? 'bg-sky-600 w-8' : 'bg-white/60 hover:bg-white'
         }`}
       />
     ))}
