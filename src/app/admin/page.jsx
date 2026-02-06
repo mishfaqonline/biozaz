@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../../utils/supabaseClient";
 import { slugify } from "../../utils/slugify";
 
+export const dynamic = "force-dynamic";
+
 const emptyProduct = {
   id: "",
   name: "",
@@ -21,6 +23,17 @@ const emptyProduct = {
 };
 
 export default function AdminPage() {
+  if (!supabase) {
+    return (
+      <section className="pt-[120px] px-4 max-w-4xl mx-auto">
+        <div className="bg-amber-50 border border-amber-200 text-amber-800 p-4 rounded-lg">
+          Admin is unavailable because Supabase environment variables are missing.
+          Please set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in
+          your deploy environment.
+        </div>
+      </section>
+    );
+  }
   const [session, setSession] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
