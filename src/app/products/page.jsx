@@ -41,10 +41,9 @@ const productsItemList = (products) => ({
 
 export default async function Page() {
   const supabase = createSupabaseServerClient();
-  const { data: products = [] } = await supabase
-    .from("products")
-    .select("*")
-    .order("id", { ascending: true });
+  const products = supabase
+    ? (await supabase.from("products").select("*").order("id", { ascending: true })).data || []
+    : [];
 
   const normalized = products.map(fromDbProduct);
 

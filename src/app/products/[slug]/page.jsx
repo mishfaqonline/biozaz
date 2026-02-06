@@ -11,6 +11,7 @@ import { fromDbProduct } from "../../../utils/productMap";
 const findProduct = async (slug) => {
   const supabase = createSupabaseServerClient();
   const target = normalizeSlug(slug);
+  if (!supabase) return null;
   const { data } = await supabase
     .from("products")
     .select("*")
