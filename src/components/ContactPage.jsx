@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import ContactNotice from "./ContactNotice";
+import ContactFormClient from "./ContactFormClient";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
 const ContactPage = () => {
@@ -63,52 +64,7 @@ const ContactPage = () => {
             </div>
           </div>
 
-          <div className="bg-white/70 p-6 rounded-lg border border-white/60 shadow-sm backdrop-blur-lg">
-            <h3 className="text-xl font-bold mb-3 text-slate-900">Send Us Your Requirements</h3>
-            <form name="contact" method="POST" data-netlify="true" action="/contact?success=1">
-              <input type="hidden" name="form-name" value="contact" />
-              <p className="hidden">
-                <label>
-                  Don’t fill this out if you’re human: <input name="bot-field" />
-                </label>
-              </p>
-              <div className="space-y-3">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Full Name"
-                  className="w-full border rounded-lg px-3 py-2"
-                  required
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  className="w-full border rounded-lg px-3 py-2"
-                  required
-                />
-                <input
-                  type="text"
-                  name="phone"
-                  placeholder="Phone / WhatsApp"
-                  className="w-full border rounded-lg px-3 py-2"
-                />
-                <textarea
-                  name="message"
-                  placeholder="Tell us your requirements..."
-                  className="w-full border rounded-lg px-3 py-2"
-                  rows={4}
-                  required
-                />
-                <button
-                  type="submit"
-                  className="w-full bg-gradient-to-r from-teal-600 to-sky-600 text-white py-2 rounded-lg font-semibold hover:from-teal-700 hover:to-sky-700 transition"
-                >
-                  Send Request
-                </button>
-              </div>
-            </form>
-          </div>
+          <ContactFormClient />
 
           <div className="bg-white/70 p-6 rounded-lg border border-white/60 shadow-sm backdrop-blur-lg">
             <h3 className="text-xl font-bold mb-3 text-slate-900">Emergency?</h3>
