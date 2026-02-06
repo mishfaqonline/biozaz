@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ContactNotice from "./ContactNotice";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
@@ -8,7 +8,9 @@ const ContactPage = () => {
       <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center text-slate-900">
         Get in Touch
       </h2>
-      <ContactNotice />
+      <Suspense fallback={null}>
+        <ContactNotice />
+      </Suspense>
 
       <div className="grid md:grid-cols-2 gap-6 mt-6 items-start">
         <div className="order-1 md:order-1 flex justify-center">
