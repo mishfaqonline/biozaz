@@ -1,5 +1,4 @@
-import Home from "../pages/Home";
-import { allimages } from "../assets/img";
+import HomePage from "../components/HomePage";
 
 export const metadata = {
   title: "Biozaz | Medical Imaging, PACS, Ultrasound & Skincare Equipment",
@@ -7,5 +6,5 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <Home sliderImages={allimages} />;
+  return <HomePage />;
 }

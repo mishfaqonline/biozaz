@@ -1,4 +1,4 @@
-import About from "../../pages/About";
+import AboutPage from "../../components/AboutPage";
 
 export const metadata = {
   title: "About Biozaz",
@@ -8,5 +8,5 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <About />;
+  return <AboutPage />;
 }

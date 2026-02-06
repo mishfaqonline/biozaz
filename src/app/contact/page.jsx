@@ -1,4 +1,4 @@
-import Contact from "../../pages/Contact";
+import ContactPage from "../../components/ContactPage";
 
 export const metadata = {
   title: "Contact Biozaz",
@@ -8,5 +8,5 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <Contact />;
+  return <ContactPage />;
 }
